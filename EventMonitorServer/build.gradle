@@ -1,0 +1,43 @@
+
+buildscript {
+    repositories {
+        mavenLocal()
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:2.0.1.RELEASE")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+
+bootJar {
+    baseName = 'gs-rest-service'
+    version =  '0.1.0'
+}
+
+repositories {
+    mavenLocal()
+    mavenCentral()
+}
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+dependencies {
+    compile group:'org.clojure', name:'clojure', version:'1.8.0'
+    compile group:'com.ar.fiuba.tdd.clojure.template', name: 'com.ar.fiuba.tdd.clojure.template', version:'0.1.0-SNAPSHOT'
+    compile("org.springframework.boot:spring-boot-starter-web")
+    compile 'org.json:json:20160212'
+    compile 'org.clojure:data.json:0.2.6'
+    testCompile('org.springframework.boot:spring-boot-starter-test')
+}
+
+configurations.all {
+    resolutionStrategy{
+        force 'xml-apis:xml-apis:1.4.01'
+    }
+}
