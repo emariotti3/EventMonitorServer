@@ -15,7 +15,7 @@
 
 (defn stateToString [s]
   (str
-    {:state {:rules (:rules  s), :counters (:counters s), :history (:history s)}}
+    {:rules (:rules  s), :counters (:counters s), :history (:history s)}
   )
 )
 
@@ -31,7 +31,7 @@
         (new State (:rules s) (:counters s) (:history s))
         (read-string data)
       )]
-      [(stateToString st) sg]
+      (stateToString st)
     )
 
 )
