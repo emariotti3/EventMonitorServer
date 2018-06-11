@@ -12,9 +12,9 @@
 After cloning the repository, install clojure library on local repository by running the following commands:
 
 ```console
-foo@user:~$ cd back-end/com.ar.fiuba.tdd.clojure.template
-foo@user:~/back-end/com.ar.fiuba.tdd.clojure.template$ lein jar
-foo@user:~/back-end/com.ar.fiuba.tdd.clojure.template$ lein install
+foo@user:~$ cd EventMonitorServer/com.ar.fiuba.tdd.clojure.template
+foo@user:~/EventMonitorServer/com.ar.fiuba.tdd.clojure.template$ lein jar
+foo@user:~/EventMonitorServer/com.ar.fiuba.tdd.clojure.template$ lein install
 ```
 
 ### Set up java + gradle project:
