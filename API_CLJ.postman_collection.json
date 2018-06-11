@@ -1,96 +1,97 @@
 {
-	"id": "f58e62d5-69b3-464d-9ff6-069cfed5f71f",
-	"name": "API_CLJ",
-	"description": null,
-	"auth": null,
-	"events": null,
-	"variables": null,
-	"order": [
-		"fc914316-16fc-4d5f-9b37-9806d20c9714",
-		"70084d32-9647-43f7-a367-2b17e4b65aa4",
-		"ef175d9c-0edc-4dbf-a020-289da4892def"
-	],
-	"folders_order": [],
-	"folders": [],
-	"requests": [
+	"info": {
+		"_postman_id": "f58e62d5-69b3-464d-9ff6-069cfed5f71f",
+		"name": "API_CLJ",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
 		{
-			"id": "70084d32-9647-43f7-a367-2b17e4b65aa4",
-			"name": "POST-QUERY-COUNTER",
-			"url": "http://localhost:8080/query-counter",
-			"description": "",
-			"data": [],
-			"dataMode": "raw",
-			"headerData": [
-				{
-					"key": "content",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				},
-				{
-					"key": "Content-Type",
-					"value": "application/json"
-				}
-			],
-			"method": "POST",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": null,
-			"rawModeData": "{\"state\" : \"{:rules {:counter-rules ({:counter-rule ([] true), :name \\\"email-count\\\", :step 1} {:counter-rule ([] (current \\\"spam\\\")), :name \\\"spam-count\\\", :step 1}), :signal-rules ()}, :counters {\\\"email-count\\\" {[] 1}, \\\"spam-count\\\" {[] 1}}, :history {}}\" ,\"counterName\":\"\\\"email-count\\\"\", \"counterParams\":\"[]\"}\n\n",
-			"headers": "content: application/json\nContent-Type: application/json\n",
-			"pathVariables": {}
-		},
-		{
-			"id": "ef175d9c-0edc-4dbf-a020-289da4892def",
-			"name": "POST-PROCESS-DATA",
-			"url": "http://localhost:8080/processor",
-			"description": "",
-			"data": [],
-			"dataMode": "raw",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
-				}
-			],
-			"method": "POST",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": null,
-			"rawModeData": "{\"state\": \"{:rules {:counter-rules ({:counter-rule ([] true), :name \\\"email-count\\\", :step 1} {:counter-rule ([] (current \\\"spam\\\")), :name \\\"spam-count\\\", :step 1}), :signal-rules ()}, :counters {}, :history {}}\" , \"data\": \"{\\\"spam\\\" true}\"}",
-			"headers": "Content-Type: application/json\n",
-			"pathVariables": {}
-		},
-		{
-			"id": "fc914316-16fc-4d5f-9b37-9806d20c9714",
 			"name": "POST-INIT-COUNTER",
-			"url": "http://localhost:8080/initializer",
-			"description": "",
-			"data": [],
-			"dataMode": "raw",
-			"headerData": [
-				{
-					"key": "Content-Type",
-					"value": "application/json",
-					"description": "",
-					"enabled": true
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"rules\": \"'((define-counter \\\"tickets-open\\\" [(current \\\"date\\\") (current \\\"hour\\\")] (= (current \\\"state\\\") \\\"OPEN\\\") ) )\"}\n\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/initializer",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"initializer"
+					]
 				}
-			],
-			"method": "POST",
-			"pathVariableData": [],
-			"queryParams": [],
-			"auth": null,
-			"events": [],
-			"folder": null,
-			"rawModeData": "{\"rules\": \"'((define-counter \\\"email-count\\\" [] true) (define-counter \\\"spam-count\\\" [] (current \\\"spam\\\")))\"}\n\n",
-			"headers": "Content-Type: application/json\n",
-			"pathVariables": {}
+			},
+			"response": []
+		},
+		{
+			"name": "POST-QUERY-COUNTER",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "content",
+						"value": "application/json"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"state\" : \"{:rules {:counter-rules ({:counter-rule ([(current \\\"date\\\") (current \\\"hour\\\")] (= (current \\\"state\\\") \\\"OPEN\\\")), :name \\\"tickets-open\\\", :step 1}), :signal-rules ()}, :counters {}, :history {}}\"  ,\"counterName\":\"\\\"tickets-open\\\"\", \"counterParams\":\"[\\\"2014-02-15\\\"]\"}\n\n"
+				},
+				"url": {
+					"raw": "http://localhost:8080/query-counter",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"query-counter"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "POST-PROCESS-DATA",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\"state\": \"{:rules {:counter-rules ({:counter-rule ([(current \\\"date\\\") (current \\\"hour\\\")] (= (current \\\"state\\\") \\\"OPEN\\\")), :name \\\"tickets-open\\\", :step 1}), :signal-rules ()}, :counters {}, :history {}}\" , \"data\": \"{\\\"datetime\\\" : \\\"2014-02-15 07:59:08\\\", \\\"state\\\" : \\\"OPEN\\\" }\" }"
+				},
+				"url": {
+					"raw": "http://localhost:8080/processor",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"processor"
+					]
+				}
+			},
+			"response": []
 		}
 	]
 }
